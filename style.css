@@ -1,0 +1,41 @@
+body {
+    background-color: white;
+}
+
+#start {
+    display: none;
+}
+
+#main {
+	color: #a0a0ff;
+    background-color: aliceblue;
+	top: 30px;
+	margin-left: auto;
+	margin-right: auto;
+	width: 1000px;
+	position: relative;
+    display: none;
+}
+
+#screen {
+	display: block;
+	margin: 0 auto;
+	width: 700px;
+	color: #aaffa0;
+    background-color: darkgreen;
+	z-index: 11;
+}
+#scrolltext {
+	position: relative;
+	top: -20px;
+	font-size: 48px;
+	text-shadow: 2px 2px yellow;
+	font-family: VT323,monospace;
+	font-weight: normal;
+	z-index: 10;
+}
+
+img.animal {
+    position: absolute;
+    transform: translate(-50%, -50%);
+}
