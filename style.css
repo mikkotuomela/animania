@@ -8,9 +8,11 @@ html, body {
 
 #start {
 	position: fixed;
-	top: 200px;
+	width: 100vw;
+	text-align: center;
+	top: 300px;
     display: none;
-	z-index: 100;
+	z-index: 1001;
 }
 
 #screen {
@@ -23,6 +25,7 @@ html, body {
 	background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+	z-index: 0;
 }
 
 #scrolltext {
@@ -33,12 +36,21 @@ html, body {
 	color: red;
 	font-family: VT323,monospace;
 	font-weight: normal;
-	z-index: 15;
+	z-index: 1000;
 }
 
 #scrolltext p {
 	text-align: center;
 	white-space: nowrap;
+}
+
+#end {
+	display: none;
+	margin-left: 50px;
+	font-size: 36px;
+	color: red;
+	font-family: VT323,monospace;
+	font-weight: normal;
 }
 
 img.animal {

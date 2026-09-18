@@ -1,6 +1,6 @@
 // Global constants
-const animalNames = ["piki", "nita", "pentu", "ostikka"];
-const animals_n = 50; // How many of each animal type
+const animalNames = ["piki", "nita", "pentu", "ostikka", "venla", "viivi"];
+const animals_n = 60; // How many of each animal type
 const axes = ["x", "y", "z", "r"];
 const imageWidth = 256;
 const maxZ = 60;
@@ -9,8 +9,7 @@ const zoom = 3;
 const fps = 60;
 const scrollFps = 10;
 const referenceSize = 300;
-//const scrollText = ". l . . .......                                      Ravel and Chain Chomp present at Skrolli Party 2026                                      Ravel and Chain Chomp present at Skrolli Party 2026                                      Ravel and Chain Chomp present at Skrolli Party 2026                                      Ravel and Chain Chomp present at Skrolli Party 2026                                      Ravel and Chain Chomp present at Skrolli Party 2026";
-let scrollText = "                          RAVEL AND CHAIN CHOMP PRESENT AT SKROLLI PARTY 2026 ANIMANIA                                ";
+let scrollText = "                          RAVEL AND CHAIN CHOMP PRESENT AT SKROLLI PARTY 2026           ANIMANIA          HTML5+JQUERY DEMO AS ALWAYS          GREETINGS TO ALL ANIMAL LOVERS AT SKROLLI PARTY!       CODE: RAVEL  PHOTOGRAPHY: RAVEL AND CHAIN CHOMP  SOUNDTRACK: RAVEL            ALSO GREETINGS TO KALEDRIINA SLEBER EID AND BEN GROSSER WHO TAUGHT ME JQUERY!             OH GOD HOW DID THIS GET HERE I AM NOT GOOD WITH COMPUTER               REMEMBER THAT THE ONLY WINNING MOVE IS NOT TO PLAY AND ALSO THAT MEOW MEOW WOOF BARK MIAU VOUVOUVOUUUU :3 :3 :3 :3         THE REAL PARTY IS INSIDE YOUR HEART      HELLO #UUSIKANAVA #KASVUA #SUOMISCENE #SKROLLI #ALTPARTY #DOT #HARMU #NETHACK                             ";
 const scrollTextSpaces = " _~.-^=";
 const scrollTextMovement = 50;
 const scrollTextY = 0;
@@ -89,7 +88,7 @@ function initPart() {
             animals[animalId]["x"] = rand(-referenceSize, referenceSize);
             animals[animalId]["y"] = rand(-referenceSize, referenceSize);
             animals[animalId]["z"] = rand(minZ, maxZ);
-            animals[animalId]["dz"] = -0.3;
+            animals[animalId]["dz"] = -0.05;
         } else if (part == 2) {
             const animalStep = (maxZ - minZ) / animalNames.length;
             const animal_i = animals[animalId]["index"] + 1;
@@ -110,10 +109,33 @@ function initPart() {
             animals[animalId]["z"] = minZ + animalStep * (animal_i + Math.floor(imgindex / 4));
             animals[animalId]["dz"] = -0.5;
             animals[animalId]["dr"] = 5;
-        } else if (part == 6) {
-            animals[animalId]["dx"] = rand(-10, 10);
-            animals[animalId]["dy"] = rand(-10, 10);
+        } else if (part == 4) {
+            const animalStep = (maxZ - minZ) / animalNames.length;
+            const animal_i = animals[animalId]["index"] + 1;
+            animals[animalId]["x"] = 0.2 * rand(-referenceSize, referenceSize);
+            animals[animalId]["y"] = 0.2 * rand(-referenceSize, referenceSize);
+            animals[animalId]["z"] = minZ + animalStep * animal_i;
             animals[animalId]["dz"] = 0.1;
+            animals[animalId]["r"] = 0;
+            animals[animalId]["dr"] = 0;
+        } else if (part == 5) {
+            const animalStep = referenceSize / animalNames.length;
+            const animal_i = animals[animalId]["index"] + 1;
+            animals[animalId]["x"] = -0.5 * referenceSize + animal_i * animalStep;
+            animals[animalId]["dx"] = rand(-0.5, 0.5);
+            animals[animalId]["y"] = 0.2 * rand(-referenceSize, referenceSize);
+            animals[animalId]["dy"] = rand(-0.5, 0.5);
+            animals[animalId]["z"] = rand(minZ, maxZ);
+            animals[animalId]["dz"] = 0.05;
+            animals[animalId]["r"] = 0;
+            animals[animalId]["dr"] = rand(-10, 10);
+        } else if (part == 6) {
+            animals[animalId]["x"] = rand(-referenceSize, referenceSize);
+            animals[animalId]["y"] = rand(-referenceSize, referenceSize);
+            animals[animalId]["z"] = rand(minZ, maxZ);
+            animals[animalId]["dx"] = rand(-2, 2);
+            animals[animalId]["dy"] = rand(-2, 2);
+            animals[animalId]["dz"] = 0.3;
             animals[animalId]["dr"] = rand(-30, 30);
         }
 
@@ -163,11 +185,12 @@ function updateAnimalPosition(animalId) {
         top:       `${y}%`,
         width:     `${size}px`,
         transform: `rotate(${animals[animalId]["r"]}deg`,
-        opacity:   `${opacity}`
+        opacity:   `${opacity}`,
+        "z-index": Math.floor((maxZ - animals[animalId]["z"]) * 10)
     });
     // If animal is too close and out of screen, wrap it
-    if (x < -outOfScreen || x > outOfScreen || y < -outOfScreen || y > outOfScreen)
-        wrapAnimal(animalId);
+    //if (x < -outOfScreen || x > outOfScreen || y < -outOfScreen || y > outOfScreen)
+    //    wrapAnimal(animalId);
 }
 
 // Update animal coordinates based on deltas
@@ -198,6 +221,7 @@ function endDemo() {
     clearInterval(scrolltextInterval);
     $("#screen").hide();
     $("#scrolltext").hide();
+    $("#end").show();
 }
 
 // Randomize animal's X and Y
