@@ -162,6 +162,8 @@ function initAnimals() {
         }
         currentAnimal++;
     });
+    // Insert färjan
+    animals[Object.keys(animals)[0]]["name"] = "viking";
 }
 
 // Return a random value between min and max
