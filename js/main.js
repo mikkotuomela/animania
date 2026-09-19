@@ -18,6 +18,7 @@ const scrollTextVisible = 30;
 const outOfScreen = 150;
 const partLength = 600;
 const scrollTextColors = ["red", "green", "lightblue", "white", "yellow", "lightpurple"];
+let audio;
 
 // Global variables
 let animals = {};
@@ -41,6 +42,9 @@ function startDemo() {
     console.log("Starting demo...");
     // Hide the button and initialize
     $("#start").hide();
+    audio = document.getElementById("music");
+    audio.src = "data:audio/wav;base64," + music;
+    audio.play();
     initAnimals();
     $("#screen").html(getAnimalsHtml());
     initPart();
@@ -217,6 +221,7 @@ function update() {
 // End demo and clean up
 function endDemo() {
     console.log("Ending demo...")
+    audio.pause();
     clearInterval(screenInterval);
     clearInterval(scrolltextInterval);
     $("#screen").hide();
